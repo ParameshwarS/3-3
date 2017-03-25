@@ -1,0 +1,49 @@
+1. Components of Hadoop 2.x :
+
+Hadoop2 Architecture has mainly 2 set of daemons
+
+ HDFS 2.x Daemons:  Name Node, Secondary Name Node (not required in HA) and Data Nodes
+ MapReduce 2.x Daemons (YARN):  Resource Manager, Node Manager
+
+
+HDFS Daemons:
+
+Name node:
+
+Namenode acts as the master for the Datanode.
+It has the directory tree of all files in the system(It has the metadata).
+In hadoop 2.x,two namenodes are present and are configured as active and standby nodes.
+In case of failure in the active namenode,standby namenode acts as the active namenode.
+
+Datanode:
+
+It stores the actual data.
+It acts as ths slave.
+In case of any failures,it doesnot afect the stability of the system.
+Data will be stored,based on the availability of space in the datanodes.  
+
+
+MAPREDUCE Daemons:
+
+Resource Manager :
+
+
+    This daemon process runs on  namenode.
+    It gets the job submitted from client and schedules it on cluster.
+    It monitors running jobs on cluster and allocates proper resources on the datanode.
+    It communicates with Node Manager(in the datanode) to track the resource utilization.
+    It uses two other processes:
+        Application Manager
+        Scheduler(for MapReduce task and resource management)
+
+Node Manager
+ 
+
+    This daemon process runs on slave nodes (Data node)
+    It coordinates with Resource Manager for task scheduling.
+    It tracks the resource utilization on the slave node
+    It also reports the resource utilization back to the Resource Manager
+    It uses
+        Application Master
+        Container(for MapReduce task scheduling and task execution).
+
